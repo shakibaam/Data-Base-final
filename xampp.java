@@ -30,22 +30,36 @@ public class xampp {
                      q = "select * from" + " " + table;
 
                      rs = stmt.executeQuery(q);
-                    while (rs.next()) {
-                        result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getInt(5);
 
-                        System.out.println(result);
+                    if (!rs.next() ) {
+                        System.out.println("Empty set");
                     }
+                    else {
+                        while (rs.next()) {
+                            result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getInt(5);
 
+
+                            System.out.println(result);
+                        }
+                    }
                     break;
 
                 case "gallery":
                      q = "select * from" + " " + table;
 
                      rs = stmt.executeQuery(q);
-                    while (rs.next()) {
-                        result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3);
 
-                        System.out.println(result);
+                    if (!rs.next() ) {
+                        System.out.println("Empty set");
+                    }
+
+                    else {
+
+                        while (rs.next()) {
+                            result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3);
+
+                            System.out.println(result);
+                        }
                     }
                     break;
 
@@ -54,13 +68,19 @@ public class xampp {
                     q = "select * from" + " " + table;
 
                     rs = stmt.executeQuery(q);
-                    while (rs.next()) {
-
-                        result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getString(5) + "  " + rs.getString(6) + "  " + rs.getFloat(7);
-
-                        System.out.println(result);
+                    if (!rs.next() ) {
+                        System.out.println("Empty set");
                     }
 
+                    else {
+
+                        while (rs.next()) {
+
+                            result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getString(5) + "  " + rs.getString(6) + "  " + rs.getFloat(7);
+
+                            System.out.println(result);
+                        }
+                    }
 
                     break;
 
@@ -69,12 +89,20 @@ public class xampp {
                     q = "select * from" + " " + table;
 
                     rs = stmt.executeQuery(q);
-                    while (rs.next()) {
 
-                        result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3);
+                    if (!rs.next() ) {
+                        System.out.println("Empty set");
+                    }
 
-                        System.out.println(result);
+                    else {
 
+                        while (rs.next()) {
+
+                            result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3);
+
+                            System.out.println(result);
+
+                        }
                     }
                     break;
 
@@ -82,11 +110,19 @@ public class xampp {
                     q = "select * from" + " " + table;
 
                     rs = stmt.executeQuery(q);
-                    while (rs.next()) {
-                        result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4);
+
+                    if (!rs.next() ) {
+                        System.out.println("Empty set");
+                    }
+
+                    else {
+
+                        while (rs.next()) {
+                            result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4);
 
 
-                        System.out.println(result);
+                            System.out.println(result);
+                        }
                     }
                     break;
 
@@ -96,10 +132,18 @@ public class xampp {
 
                     rs = stmt.executeQuery(q);
 
-                    while (rs.next()) {
-                        result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getFloat(5) + "  " + rs.getFloat(6);
+                    if (!rs.next() ) {
+                        System.out.println("Empty set");
+                    }
 
-                        System.out.println(result);
+                    else {
+
+                        while (rs.next()) {
+                            result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getFloat(5) + "  " + rs.getFloat(6);
+
+                            System.out.println(result);
+
+                        }
 
                     }
                     break;
