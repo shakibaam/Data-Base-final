@@ -86,9 +86,7 @@ public class xampp {
                             System.out.println(result);
                         }
 
-                    }
-
-                    else {
+                    } else {
                         System.out.println("Empty set");
                         break;
                     }
@@ -107,7 +105,6 @@ public class xampp {
                         rs.beforeFirst();
 
 
-
                         while (rs.next()) {
 
                             result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3);
@@ -115,9 +112,7 @@ public class xampp {
                             System.out.println(result);
 
                         }
-                    }
-
-                    else {
+                    } else {
                         System.out.println("Empty set");
                         break;
                     }
@@ -133,16 +128,13 @@ public class xampp {
                         rs.beforeFirst();
 
 
-
                         while (rs.next()) {
                             result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4);
 
 
                             System.out.println(result);
                         }
-                    }
-
-                    else {
+                    } else {
                         System.out.println("Empty set");
                         break;
                     }
@@ -160,16 +152,13 @@ public class xampp {
                         rs.beforeFirst();
 
 
-
                         while (rs.next()) {
                             result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getFloat(5) + "  " + rs.getFloat(6);
 
                             System.out.println(result);
 
                         }
-                    }
-
-                    else {
+                    } else {
                         System.out.println("Empty set");
                         break;
                     }
@@ -440,13 +429,12 @@ public class xampp {
 
 
                     String id = scanner.next();
-                    q = "select * from " + tableName + "where " + "NATIONAL_CODE='" + id + "'";
+                    q = "select * from artist where NATIONAL_CODE='"+id+"'";
                     rs = stmt.executeQuery(q);
 
-                    if (!rs.next()) {
-                        System.out.println("no such id found try again...");
-                        break;
-                    } else {
+                    if (rs.next()) {
+                        rs.beforeFirst();
+
 
                         System.out.println("enter new" + " " + col);
 
@@ -468,6 +456,11 @@ public class xampp {
 
                         System.out.println("update successfully");
                     }
+
+                    else {
+                        System.out.println("no such id found try again...");
+                    }
+
                 } catch (SQLException e) {
                     System.out.println("Error Occurred try again :(");
                 }
@@ -484,13 +477,25 @@ public class xampp {
                     col = scanner.next();
                     System.out.println("enter the gallery name you want update its " + col);
                     String name = scanner.next();
-                    System.out.println("enter new " + col);
-                    newcol = scanner.next();
-                    query = "update gallery set" + " " + col + "=? where" + " " + "GALLERY_NAME='" + name + "'";
-                    preparedStmt = conn.prepareStatement(query);
-                    preparedStmt.setString(1, newcol);
-                    preparedStmt.execute();
-                    System.out.println("update successfully");
+
+                    q = "select * from gallery where gallery_name='"+name+"'";
+                    rs = stmt.executeQuery(q);
+                    if (rs.next()) {
+                        rs.beforeFirst();
+
+                        System.out.println("enter new " + col);
+                        newcol = scanner.next();
+                        query = "update gallery set" + " " + col + "=? where" + " " + "GALLERY_NAME='" + name + "'";
+                        preparedStmt = conn.prepareStatement(query);
+                        preparedStmt.setString(1, newcol);
+                        preparedStmt.execute();
+                        System.out.println("update successfully");
+                    }
+
+                    else {
+                        System.out.println("no such name found try again...");
+                    }
+
                 } catch (SQLException e) {
                     System.out.println("Error Occurred try again :(");
                 }
@@ -506,23 +511,35 @@ public class xampp {
                     System.out.println("enter the id of art you want update its " + col);
                     String artId = scanner.next();
 
-                    if (col != "cost") {
-                        System.out.println("enter new " + col);
-                        newcol = scanner.next();
-                        query = "update artwork set" + " " + col + "=? where" + " " + "art_id='" + artId + "'";
-                        preparedStmt = conn.prepareStatement(query);
-                        preparedStmt.setString(1, newcol);
-                        preparedStmt.execute();
-                        System.out.println("update successfully");
+                    q = "select * from artwork where art_id='"+artId+"'";
+                    rs = stmt.executeQuery(q);
 
-                    } else {
-                        System.out.println("enter new " + col);
-                        float newCost = scanner.nextFloat();
-                        query = "update artwork set" + " " + col + "=? where" + " " + "art_id='" + artId + "'";
-                        preparedStmt = conn.prepareStatement(query);
-                        preparedStmt.setFloat(1, newCost);
-                        preparedStmt.execute();
-                        System.out.println("update successfully");
+                    if (rs.next()) {
+                        rs.beforeFirst();
+
+
+                        if (col != "cost") {
+                            System.out.println("enter new " + col);
+                            newcol = scanner.next();
+                            query = "update artwork set" + " " + col + "=? where" + " " + "art_id='" + artId + "'";
+                            preparedStmt = conn.prepareStatement(query);
+                            preparedStmt.setString(1, newcol);
+                            preparedStmt.execute();
+                            System.out.println("update successfully");
+
+                        } else {
+                            System.out.println("enter new " + col);
+                            float newCost = scanner.nextFloat();
+                            query = "update artwork set" + " " + col + "=? where" + " " + "art_id='" + artId + "'";
+                            preparedStmt = conn.prepareStatement(query);
+                            preparedStmt.setFloat(1, newCost);
+                            preparedStmt.execute();
+                            System.out.println("update successfully");
+                        }
+                    }
+
+                    else {
+                        System.out.println("no such id found try again...");
                     }
                 } catch (SQLException e) {
                     System.out.println("Error Occurred try again :(");
@@ -538,13 +555,23 @@ public class xampp {
                     col = scanner.next();
                     System.out.println("enter the auction name you want update its " + col);
                     String auctionName = scanner.next();
+
+                    q = "select * from auction where auction_name='"+auctionName+"'";
+                    rs = stmt.executeQuery(q);
+
+                    if (rs.next()){
+
                     System.out.println("enter new " + col);
                     newcol = scanner.next();
                     query = "update auction set" + " " + col + "=? where" + " " + "auction_name='" + auctionName + "'";
                     preparedStmt = conn.prepareStatement(query);
                     preparedStmt.setString(1, newcol);
                     preparedStmt.execute();
-                    System.out.println("update successfully");
+                    System.out.println("update successfully");}
+
+                    else {
+                        System.out.println("no such name found try again...");
+                    }
                 } catch (SQLException e) {
                     System.out.println("Error Occurred try again :(");
                 }
@@ -559,13 +586,24 @@ public class xampp {
                     col = scanner.next();
                     System.out.println("enter the customer id you want update his/her " + col);
                     String customerId = scanner.next();
+                    q = "select * from customer where customer_id='"+customerId+"'";
+                    rs = stmt.executeQuery(q);
+
+                    if (rs.next()){
+                        rs.beforeFirst();
+
                     System.out.println("enter new " + col);
                     newcol = scanner.next();
                     query = "update customer set" + " " + col + "=? where" + " " + "customer_id='" + customerId + "'";
                     preparedStmt = conn.prepareStatement(query);
                     preparedStmt.setString(1, newcol);
                     preparedStmt.execute();
-                    System.out.println("update successfully");
+                    System.out.println("update successfully");}
+
+                    else {
+
+                        System.out.println("no such id found try again...");
+                    }
                 } catch (SQLException e) {
 
                     System.out.println("Error Occurred try again :(");
@@ -580,23 +618,35 @@ public class xampp {
                     col = scanner.next();
                     System.out.println("enter the factor id you want update its " + col);
                     String factorId = scanner.next();
-                    if (col != "offer_cost" || col != "first_cost") {
-                        System.out.println("enter new " + col);
-                        newcol = scanner.next();
-                        query = "update factor set" + " " + col + "=? where" + " " + "factor_id='" + factorId + "'";
-                        preparedStmt = conn.prepareStatement(query);
-                        preparedStmt.setString(1, newcol);
-                        preparedStmt.execute();
-                        System.out.println("update successfully");
-                    } else {
 
-                        System.out.println("enter new " + col);
-                        float cost1 = scanner.nextFloat();
-                        query = "update factor set" + " " + col + "=? where" + " " + "factor_id='" + factorId + "'";
-                        preparedStmt = conn.prepareStatement(query);
-                        preparedStmt.setFloat(1, cost1);
-                        preparedStmt.execute();
-                        System.out.println("update successfully");
+                    q = "select * from factor where factor_id='"+factorId+"'";
+                    rs = stmt.executeQuery(q);
+
+                    if (rs.next()) {
+
+                        rs.beforeFirst();
+                        if (col != "offer_cost" || col != "first_cost") {
+                            System.out.println("enter new " + col);
+                            newcol = scanner.next();
+                            query = "update factor set" + " " + col + "=? where" + " " + "factor_id='" + factorId + "'";
+                            preparedStmt = conn.prepareStatement(query);
+                            preparedStmt.setString(1, newcol);
+                            preparedStmt.execute();
+                            System.out.println("update successfully");
+                        } else {
+
+                            System.out.println("enter new " + col);
+                            float cost1 = scanner.nextFloat();
+                            query = "update factor set" + " " + col + "=? where" + " " + "factor_id='" + factorId + "'";
+                            preparedStmt = conn.prepareStatement(query);
+                            preparedStmt.setFloat(1, cost1);
+                            preparedStmt.execute();
+                            System.out.println("update successfully");
+                        }
+                    }
+
+                    else {
+                        System.out.println("no suc id found try again...");
                     }
                 } catch (SQLException e) {
                     System.out.println("Error Occurred try again :(");
