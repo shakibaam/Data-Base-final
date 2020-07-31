@@ -663,12 +663,16 @@ public class xampp {
 
     }
 
-    public void delete() {
+    public void delete() throws SQLException {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("which table you want delete from?");
         String tableName = scanner.next();
         String query = "";
+
+        String q = "";
+        ResultSet rs = null;
+        Statement stmt = this.conn.createStatement();
 
 
         System.out.println("enter the record id (or name if you select gallery or auction) you want delete it: ");
@@ -678,31 +682,173 @@ public class xampp {
         switch (tableName) {
 
             case "artist":
+                q = "select * from artist where national_code='"+delete+"'";
+                rs = stmt.executeQuery(q);
+                if (rs.next()){
+                    rs.beforeFirst();
 
 
                 query = "delete from" + " " + tableName + " where NATIONAL_CODE =" + delete;
+
+                    try {
+
+
+                        PreparedStatement preparedStmt = conn.prepareStatement(query);
+                        preparedStmt.execute();
+                        System.out.println("delete successfully");
+                    } catch (SQLException e) {
+                        System.out.println("Error Occurred try again :(");
+                    }
+
+
+                }
+
+                else {
+                    System.out.println("no such id found try again...");
+                }
 
                 break;
 
             case "gallery":
 
+                q = "select * from gallery where gallery_delete='"+delete+"'";
+                rs = stmt.executeQuery(q);
+                if (rs.next()){
+
+                    rs.beforeFirst();
+
                 query = "delete from" + " " + tableName + " where gallery_name ='" + delete + "'";
+
+                    try {
+
+
+                        PreparedStatement preparedStmt = conn.prepareStatement(query);
+                        preparedStmt.execute();
+                        System.out.println("delete successfully");
+                    } catch (SQLException e) {
+                        System.out.println("Error Occurred try again :(");
+                    }
+
+
+                }
+
+
+                else {
+                    System.out.println("no such name found try again...");
+                }
+
                 break;
 
             case "artwork":
+
+
+                q = "select * from artwork where art_id='"+delete+"'";
+                rs = stmt.executeQuery(q);
+
+                if (rs.next()){
+
+                    rs.beforeFirst();
+
                 query = "delete from" + " " + tableName + " where art_id ='" + delete + "'";
+
+                    try {
+
+
+                        PreparedStatement preparedStmt = conn.prepareStatement(query);
+                        preparedStmt.execute();
+                        System.out.println("delete successfully");
+                    } catch (SQLException e) {
+                        System.out.println("Error Occurred try again :(");
+                    }
+
+                }
+
+                else {
+                    System.out.println("no such id found try again...");
+                }
                 break;
 
             case "auction":
+
+                q = "select * from auction where auction_name='"+delete+"'";
+                rs = stmt.executeQuery(q);
+
+                if (rs.next()){
+
+                    rs.beforeFirst();
                 query = "delete from" + " " + tableName + " where auction_name ='" + delete + "'";
+
+                    try {
+
+
+                        PreparedStatement preparedStmt = conn.prepareStatement(query);
+                        preparedStmt.execute();
+                        System.out.println("delete successfully");
+                    } catch (SQLException e) {
+                        System.out.println("Error Occurred try again :(");
+                    }
+
+                }
+
+                else {
+                    System.out.println("no such name found try again..");
+                }
                 break;
 
             case "customer":
+
+                q = "select * from customer where customer_id='"+delete+"'";
+                rs = stmt.executeQuery(q);
+
+                if (rs.next()){
+                    rs.beforeFirst();
+
                 query = "delete from" + " " + tableName + " where customer_id ='" + delete + "'";
+
+                    try {
+
+
+                        PreparedStatement preparedStmt = conn.prepareStatement(query);
+                        preparedStmt.execute();
+                        System.out.println("delete successfully");
+                    } catch (SQLException e) {
+                        System.out.println("Error Occurred try again :(");
+                    }
+                }
+
+                else {
+                    System.out.println("no such id found try again...");
+                }
                 break;
 
             case "factor":
+
+
+
+                q = "select * from customer where customer_id='"+delete+"'";
+                rs = stmt.executeQuery(q);
+
+                if (rs.next()){
+
+                    rs.beforeFirst();
+
                 query = "delete from" + " " + tableName + " where factor_id='" + delete + "'";
+
+                    try {
+
+
+                        PreparedStatement preparedStmt = conn.prepareStatement(query);
+                        preparedStmt.execute();
+                        System.out.println("delete successfully");
+                    } catch (SQLException e) {
+                        System.out.println("Error Occurred try again :(");
+                    }
+
+                }
+
+                else {
+                    System.out.println("no such id found try again...");
+                }
                 break;
 
             default:
@@ -712,15 +858,6 @@ public class xampp {
 
         }
 
-        try {
-
-
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.execute();
-            System.out.println("delete successfully");
-        } catch (SQLException e) {
-            System.out.println("Error Occurred try again :(");
-        }
 
 
     }
