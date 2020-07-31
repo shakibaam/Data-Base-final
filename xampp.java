@@ -132,6 +132,8 @@ public class xampp {
 
                     rs = stmt.executeQuery(q);
 
+                    
+
                     if (!rs.next() ) {
                         System.out.println("Empty set");
                     }
