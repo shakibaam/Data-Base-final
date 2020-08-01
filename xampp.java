@@ -153,7 +153,7 @@ public class xampp {
 
 
                         while (rs.next()) {
-                            result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getFloat(5) + "  " + rs.getFloat(6);
+                            result = rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + "  " + rs.getString(4) + "  " + rs.getFloat(5) ;
 
                             System.out.println(result);
 
@@ -377,14 +377,14 @@ public class xampp {
                     String factor_auction = scanner.nextLine();
                     System.out.println("enter the cost that customer offered:");
                     float offer = scanner.nextFloat();
-                    System.out.println("enter the first cost of art:");
-                    float firstCost = scanner.nextFloat();
+                  //  System.out.println("enter the first cost of art:");
+                    //float firstCost = scanner.nextFloat();
                     preparedStmt.setString(1, factor_id);
                     preparedStmt.setString(2, factor_customer);
                     preparedStmt.setString(3, factor_artist);
                     preparedStmt.setString(4, factor_auction);
                     preparedStmt.setFloat(5, offer);
-                    preparedStmt.setFloat(6, firstCost);
+                    //preparedStmt.setFloat(6, firstCost);
                     preparedStmt.execute();
                     System.out.println("insert successfully :)");
 
@@ -625,7 +625,7 @@ public class xampp {
                     if (rs.next()) {
 
                         rs.beforeFirst();
-                        if (col != "offer_cost" || col != "first_cost") {
+                        if (col != "offer_cost") {
                             System.out.println("enter new " + col);
                             newcol = scanner.next();
                             query = "update factor set" + " " + col + "=? where" + " " + "factor_id='" + factorId + "'";
